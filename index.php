@@ -1,6 +1,8 @@
 <?php 
+
 ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
+
 ?>
 
 <html>
@@ -13,15 +15,22 @@ error_reporting(E_ALL | E_STRICT);
 <body>
 
 <div id="header">
-	<!-- <h1>Camagru is here !</h1> -->
-<ul>
-		<li style="float: left"><a href=""> <img src="images/camera-flat.png" width="32%"></a></li>
-		<li><a href="">Logout</a></li>
-		<li><a href="">Edit Profile</a></li>
+	
+	<ul>
+		<li style="float: left"><a href="./"> Home </a></li>
+		<li><a href="./?page=login">Log in</a></li>
+		<li><a href="./?page=signup">Sign Up</a></li>
 	</ul>
 </div>
 
-<?php include "montage.php"; ?>
+<?php 
+	if ($_GET["page"] == "signup")
+		include "signup.php";
+	else if ($_GET["page"] == "login")
+		include "login.php";
+	else
+		include "feed.php";
+?>	
 
 <div id="footer">
 	<p style="text-align: center;"> (c) shill 2016 </p>

@@ -1,12 +1,15 @@
 <!-- montage.php -->
 
+<?php 
+?>
+
 <div class="colmask rightmenu">
 	<div class="colleft">
 		<div class="col1">
 			<!-- Column 1 start -->
 			<h2 style="text-align: center">Step 1 : Pick a Filter</h2>
 			<div>
-			<img style="position: relative; top: 280px; left: 500px" src="images/filters/glasses.png" width="30%">
+			<img style="position: relative;" src="images/filters/glasses.png" width="30%">
 			<img src="images/filters/wig.png" width="30%">
 			<img src="images/filters/glasses.png" width="30%">
 
@@ -15,11 +18,15 @@
 				<h2 style="text-align: center">Step 2 : Take a Picture</h2>
 			</div>
 			<div><video id="video"></video>
-<button id="startbutton">Prendre une photo</button>
-<canvas id="canvas"></canvas>
-<img src="" id="photo" alt="photo">
+				<form action="" method="post">
+					<input type="text" name="user_login" />
+					<input type="submit" name="submit" value="shoot" />
+					<button id="startbutton" type="submit" >Prendre une photo</button>
+				<canvas id="canvas"></canvas>
+				</form>
+			</div>
 
-<script>
+<!-- <script>
 
 	(function() {
 
@@ -72,15 +79,14 @@
 			canvas.height = height;
 			canvas.getContext('2d').drawImage(video, 0, 0, width, height);
 			var data = canvas.toDataURL('image/png');
-//			photo.setAttribute('src', data);
+			console.log(data);
 		}
-
 		startbutton.addEventListener('click', function(ev){
 			takepicture();
 			ev.preventDefault();
 		}, false);
 
-	})(); </script>
+	})(); </script> -->
 			</div>
 
 
