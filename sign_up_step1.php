@@ -7,26 +7,51 @@ function username_exist()
 		echo $_POST["submit_err"];
 	}
 }
-
 ?> 
+<form action="./sign_up.php" method="post">
+      
+        <h1>Sign Up</h1>
+        
+        <fieldset>
+          <legend><span class="number">1</span><?php username_exist(); ?></legend>
+          <label for="name">Login:</label>
+          <input type="text" name="login">
+          
+          <label for="mail">Email:</label>
+          <input type="email" name="email">
+          
+          <label for="password">Password:</label>
+          <input type="password" name="passwd">
+          
+        </fieldset>
+         <button type="submit" name="submit" value="OK">Sign Up</button>
+      </form>
 
 
-			<!-- Column 1 start -->
-			<h2 style="text-align: center">Create new account :</h2>
-			<h3><?php username_exist(); ?> </h3>
-			<div>
-				<form action="./?page=sign_up" method="post">
-				<div>
-					Login: <input type="text" name="login" />
-				</div>
-				<div>
-					Email: <input type="text" name="email" />
-				</div>
-				<div>
-					Pass: <input type="password" name="passwd" />
-				</div>
-				<div>
-					<input type="submit" name="submit" value="OK" />
-				</div>
-				</form>
-			</div>
+
+
+<?php  
+
+/*
+<form action="./sign_up.php" method="post">
+      
+        <h1>Sign Up</h1>
+        
+        <fieldset>
+          <legend><span class="number">1</span><?php username_exist(); ?></legend>
+          <label for="name">Login:</label>
+          <input type="text" id="name" name="login">
+          
+          <label for="mail">Email:</label>
+          <input type="email" id="mail" name="email">
+          
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="passwd">
+          
+        </fieldset>
+         <button type="submit" name="submit" value="OK">Sign Up</button>
+      </form>
+*/
+
+
+?>

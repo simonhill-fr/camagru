@@ -19,7 +19,7 @@ function create_db() {
 	echo "created db";
 }
 
-function attempt_connection() {
+function db_connection() {
 
 	include 'database.php';
 	try {
@@ -31,6 +31,7 @@ function attempt_connection() {
 		create_db();
 
 	}
+	return ($dbh);
 }
 
-attempt_connection();
+db_connection();
