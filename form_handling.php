@@ -43,7 +43,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] === "OK")
 			$passwd = hash("whirlpool", $_POST["passwd"]);
 			$activation = md5(uniqid(rand(0,1000)));
 			$sql = "INSERT INTO users 
-					VALUES ('0', '".$login."', '".$email."', '".$passwd."', '".$activation."', 'pending')";
+					VALUES ('0', '".$login."', '".$email."', '".$passwd."', '".$activation."', 'pending', '')";
 			if ($db->exec($sql))
 				{}
 			else

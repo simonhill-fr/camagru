@@ -1,6 +1,15 @@
 <!-- montage.php -->
 
 <?php 
+
+if (isset($_POST["frr"]) && $_POST["frr"] !== "")
+{
+	include "cam.php";
+	$_POST["frr"] = NULL;
+}
+else
+	echo "ISNT";
+
 ?>
 
 <div class="colmask rightmenu">
@@ -9,24 +18,33 @@
 			<!-- Column 1 start -->
 			<h2 style="text-align: center">Step 1 : Pick a Filter</h2>
 			<div>
-			<img style="position: relative;" src="images/filters/glasses.png" width="30%">
-			<img src="images/filters/wig.png" width="30%">
-			<img src="images/filters/glasses.png" width="30%">
+				<img src="images/filters/glasses.png" width="30%">
+				<img src="images/filters/wig.png" width="30%">
+				<img src="images/filters/glasses.png" width="30%">
 
 			</div>
 			<div>
 				<h2 style="text-align: center">Step 2 : Take a Picture</h2>
+
 			</div>
-			<div><video id="video"></video>
-				<form action="" method="post">
-					<input type="text" name="user_login" />
-					<input type="submit" name="submit" value="shoot" />
-					<button id="startbutton" type="submit" >Prendre une photo</button>
-				<canvas id="canvas"></canvas>
+			<div style="text-align: center">
+				<video id="video"></video>
+				<form action="./?page=create" method="post">					
+					<div style="display: none"><canvas id="canvas"></canvas></div>
+					<div><button id="startbutton" name="frr" type="submit" >Prendre une photo</button></div>
 				</form>
 			</div>
+		</div>
+		<!-- Column 1 end -->
+		<div class="col2">
+		<?php echo $display_img ?>
+		</div>
+	</div>
 
-<!-- <script>
+</div>
+</div>
+
+<script>
 
 	(function() {
 
@@ -74,29 +92,20 @@
 			}
 		}, false);
 
-		function takepicture() {
+		function takepicture() 
+		{
 			canvas.width = width;
 			canvas.height = height;
 			canvas.getContext('2d').drawImage(video, 0, 0, width, height);
 			var data = canvas.toDataURL('image/png');
-			console.log(data);
+			startbutton.value=data;
+			//video.style.display="none";
 		}
-		startbutton.addEventListener('click', function(ev){
+
+		startbutton.addEventListener('click', function (ev){
 			takepicture();
-			ev.preventDefault();
+			/*ev.preventDefault();*/
 		}, false);
 
-	})(); </script> -->
-			</div>
-
-
-
-
-
-
-			<!-- Column 1 end -->
-		</div>
-
-		
-	</div>
-</div>
+	})(); 
+</script>
