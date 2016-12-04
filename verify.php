@@ -33,6 +33,7 @@ if (isset($_GET["login"]) && isset($_GET["key"]))
 		{
 			echo "success";
 			$db->exec("UPDATE users SET status = 'active' WHERE login='".$_GET["login"]."'");
+			$db->exec("UPDATE users SET activation = '' WHERE login='".$_GET["login"]."'");
 			$db = NULL;
 		}
 	}
@@ -42,5 +43,4 @@ if (isset($_GET["login"]) && isset($_GET["key"]))
 ?>
 </body>
 </html>
-
 

@@ -47,7 +47,7 @@ if ($_POST["submit"] == "OK")
 <head>
 		<!-- <meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-		<title>Camagru - Create Account</title>
+		<title>Camagru - Log in</title>
 		<link rel="stylesheet" type="text/css" href="./signup.css">
 		<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'> -->
 		<!-- <link rel="stylesheet" href="css/main.css"> -->
@@ -65,7 +65,7 @@ if ($_POST["submit"] == "OK")
 				
 				<label for="password">Password:</label>
 				<input type="password" name="passwd">
-				
+			<a href="./request_new_pass.php"> Forgot password ? </a>	
 			</fieldset>
 			<button type="submit" name="submit" value="OK">Sign Up</button>
 		</form>
