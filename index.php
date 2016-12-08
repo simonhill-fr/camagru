@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include 'config/setup.php';
+include 'tools/database_operations.php';
 	/*REMOVE */
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL | E_STRICT);
@@ -20,20 +21,19 @@ include 'config/setup.php';
 	<ul>
 		<li style="float: left"><a href="./"> Home </a></li>
 		<?php
-		if (isset($_SESSION["user"]) && $_SESSION["user"] !== "")
-			include 'nav_user.php';
-		else
-			include 'nav_anonym.php'
+			if (isset($_SESSION["user"]) && $_SESSION["user"] !== "")
+				include 'nav_user.php';
+			else
+				include 'nav_anonym.php'
 		?>
 	</ul>
 </div>
 <?php
-if (isset($_GET["page"])) {
+
+if (isset($_GET["page"]))
+{
 	if ($_GET["page"] == "create")
 		include "create.php";
-	/*else if ($_GET["page"] === "log_out")
-		include "verify.php";*/
-
 }
 else
 	include "feed.php";

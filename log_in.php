@@ -37,6 +37,7 @@ if ($_POST["submit"] == "OK")
 	else
 	{
 		$_SESSION["user"] = $_POST["login"];
+		$_SESSION["user_id"] = $match["0"]["id"];
 		header("Location: ./");
 	}
 
@@ -59,7 +60,7 @@ if ($_POST["submit"] == "OK")
 			<h1>Log in</h1>
 			
 			<fieldset>
-				<legend><span class="number">1</span><?php no_match(); ?></legend>
+				<legend><?php no_match(); ?></legend>
 				<label for="name">Login:</label>
 				<input type="text" name="login">
 				
@@ -67,7 +68,8 @@ if ($_POST["submit"] == "OK")
 				<input type="password" name="passwd">
 			<a href="./request_new_pass.php"> Forgot password ? </a>	
 			</fieldset>
-			<button type="submit" name="submit" value="OK">Sign Up</button>
+			<button type="submit" name="submit" value="OK">Log in</button>
+			<a href="./sign_up.php"> Don't have an account ? </a>
 		</form>
 
 	</body></html>

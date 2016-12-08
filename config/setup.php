@@ -24,12 +24,11 @@ function db_connection() {
 	include 'database.php';
 	try {
 		$dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-//		echo "Database was found<br>";
+		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} 
 	catch (PDOException $e) {
 		echo 'Database not found, creating new db <br> ';
 		create_db();
-
 	}
 	return ($dbh);
 }
