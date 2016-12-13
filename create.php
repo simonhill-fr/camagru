@@ -2,7 +2,7 @@
 
 <?php 
 
-function put_user_img()
+/*function put_user_img()
 {
 	$db = db_connection();
 	$pictures = $db->prepare("
@@ -18,7 +18,7 @@ function put_user_img()
 		while ($k < 5)
 		{
 			if (isset($pic[''.$k.''][0])) {
-				echo "	<img onmouseenter='displayDeleteButton(".$k.")' onmouseleave='hideDeleteButton(".$k.")' src='".$pic[''.$k.'']['0']."' width='80%' >";
+				echo "	<img src='".$pic[''.$k.'']['0']."' width='80%' >";
 				echo "	<form action='./?page=create' method='post' >
 						<button class='delbtn' id='delbtn".$k."' type='submit' name='img_delete' value='";
 				echo $pic[''.$k.''][0];
@@ -27,7 +27,7 @@ function put_user_img()
 			$k++;
 		}
 	}
-}
+}*/
 
 if (isset($_POST["img_data"]) && $_POST["img_data"] !== ""
 	&& isset($_POST["filter"]) && $_POST["filter"] )
@@ -35,7 +35,6 @@ if (isset($_POST["img_data"]) && $_POST["img_data"] !== ""
 	include "create_picture.php";
 	$filterPath = "./images/filters/" . $_POST["filter"];
 	create_picture($filterPath);
-	$_POST["img_data"] = NULL;
 }
 
 if (isset($_POST["img_delete"])) {
@@ -52,19 +51,19 @@ if (isset($_POST["img_delete"])) {
 		<div class="col1">
 			<!-- Column 1 start -->
 			<h2 style="text-align: center">Step 1 : Pick a Filter</h2>
-			<div>
+			<div align="center">
 				<form action="./?page=create" method="post" name="takepic_form">
 					<label>
-						<input type="radio" value="glasses.png" name="filter" required>
-						<img onmouseover="bigImg(this)" onmouseout="normalImg(this)" src="images/filters/glasses.png" width="10%">
+						<input style="visibility: hidden" type="radio" value="glasses.png" name="filter" required>
+						<img id="but1" class="filters" onclick="imgSelect(this)" src="images/filters/glasses.png" width="20%">
 					</label>
 					<label>
-						<input type="radio" value="wig.png" name="filter" required>
-						<img onmouseover="bigImg(this)" onmouseout="normalImg(this)" src="images/filters/wig.png" width="10%">
+						<input style="visibility: hidden" type="radio" value="wig.png" name="filter" required>
+						<img id="but2" class="filters" onclick="imgSelect(this)" src="images/filters/wig.png" width="20%">
 					</label>
 					<label>
-						<input type="radio" value="dog.png" name="filter" required>
-						<img onmouseover="bigImg(this)" onmouseout="normalImg(this)" src="images/filters/dog.png"  width="10%">
+						<input style="visibility: hidden" type="radio" value="dog.png" name="filter" required>
+						<img id="but3" class="filters" onclick="imgSelect(this)" src="images/filters/dog.png"  width="20%">
 					</label>
 				</div>
 				<div>
@@ -78,8 +77,8 @@ if (isset($_POST["img_delete"])) {
 			</div>
 		</div>
 		<!-- Column 1 end -->
-		<div class="col2">
-			<?php put_user_img(); ?>
+		<div id="thumb_sidebar" class="col2">
+
 		</div>
 	</div>
 	</div>
@@ -140,14 +139,47 @@ if (isset($_POST["img_delete"])) {
 			canvas.height = height;
 			canvas.getContext('2d').drawImage(video, 0, 0, width, height);
 			var data = canvas.toDataURL('image/png');
-			startbutton.value=data;
-			//video.style.display="none";
+			//startbutton.value=data;
+			
+			var xhttp;
+			if (window.XMLHttpRequest) 
+			{
+				xhttp = new XMLHttpRequest();
+			}
+
+			if (xhttp.readyState == 0 || xhttp.readyState == 4) 
+			{
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) 
+					{
+						var xhr= new XMLHttpRequest();
+						xhr.open('GET', 'http://localhost:8080/camagru/sidebar_usr_img.php', true);
+						
+						xhr.onreadystatechange= function() {
+							if (this.readyState == 4 && this.status == 200)
+							{
+								console.log(document.getElementById("thumb_sidebar").innerHTML = this.responseText);
+							}
+						};
+
+						xhr.send();						
+					}
+				};
+
+				xhttp.open("POST", "http://localhost:8080/camagru/index.php?page=create", true);
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("img_data=" + data + "&filter=glasses.png");
+			}
+			else 
+				setTimeout('takepicture()', 500);
+
+
 			
 		}
 
 		startbutton.addEventListener('click', function (ev){
 			takepicture();
-			/*ev.preventDefault();*/
+			ev.preventDefault();
 		}, false);
 
 	})();
@@ -155,28 +187,17 @@ if (isset($_POST["img_delete"])) {
 	
 
 	
-function bigImg(x) {
-	x.style.width = "15%";
+function imgSelect(x) {
+	but1 = document.getElementById("but1");
+	but2 = document.getElementById("but2");
+	but3 = document.getElementById("but3");
+
+	but1.style.background = "none";
+	but2.style.background = "none";
+	but3.style.background = "none";
+	x.style.background="lightgreen";
 
 }
-function normalImg(x) {
-	x.style.width = "10%";
-}
-
-function displayDeleteButton(n)
-{
-	/*deleteButton = document.getElementById("delbtn" + n);
-	deleteButton.style.display="block";*/
-}
-
-function hideDeleteButton(n)
-{
-	/*deleteButton = document.getElementById("delbtn" + n);
-	deleteButton.style.display="none";*/
-}
-
-
-
 
 
 

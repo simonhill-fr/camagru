@@ -15,12 +15,6 @@ function create_picture($filter_source){
 	$bottom_width = imagesx($bottom);
 	$bottom_height = imagesy($bottom);
 
-	// Resize stamp to fit bottom layer size
-	/*$stamp_resize = imagecreate($bottom_width, $bottom_height);
-	$stamp_width = imagesx($stamp);
-	$stamp_height = imagesy($stamp);
-	imagecopyresized($stamp_resize, $stamp, 0, 0, 0, 0, $bottom_width, $bottom_height, $stamp_width, $stamp_height);*/
-
 	// Copy stamp on bottom layer
 	imagecopy($bottom, $stamp, 0, 0, 0, 0, $bottom_width, $bottom_height);
 
