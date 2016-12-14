@@ -20,7 +20,7 @@ h1, h2, h3 {
 	margin:.8em 0 .2em 0;
 	padding:0;
 }
-/*#startbutton {
+#startbutton {
 	background-color: #4CAF50;
     border: none;
     color: white;
@@ -28,7 +28,7 @@ h1, h2, h3 {
     text-decoration: none;
     margin: 4px 2px;
     cursor: pointer;
-}*/
+}
 p {
 	margin:.4em 0 .8em 0;
 	padding:0;
@@ -182,7 +182,9 @@ img {
 	border: 1px solid #ddd;
 }
 
-
+#r1, #r2, #r3 {
+	visibility: hidden;
+}
 
 
 

@@ -32,7 +32,7 @@ include 'tools/database_operations.php';
 				array_push($error, "Error updating database");
 			else
 			{
-				include 'public/email_verify_success.html';
+				include 'view/email_verify_success.html';
 			}
 }
 if ($error)
