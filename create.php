@@ -39,16 +39,23 @@ if (isset($_POST["img_delete"])) {
 						<img id="but3" class="filters" onclick="imgSelect(this)" src="images/filters/dog.png"  width="20%">
 					</label>
 				</div>
-				<div align="center">
-					<h2>Step 2 : Take a Picture</h2>
-					<h3> or Upload picture </h3>
-				</div>
+
 				<div style="text-align: center">
+					<h2>Step 2 : Take a Picture</h2>
 					<video id="video"></video>
 					<div style="display: none"><canvas id="canvas"></canvas></div>
-					<div><button id="startbutton" name="img_data" type="submit" disabled>Prendre une photo</button></div>
+					<div><button id="startbutton" name="img_data" type="submit" disabled>Take a picture</button></div>
 				</form>
 			</div>
+			<div align="center">
+				<div>
+					<form action="upload.php" method="post" enctype="multipart/form-data">
+					<h3> or Upload picture </h3>
+					<input type="file" name="imgToUpload" id="imgToUpload" \>
+					<input type="submit" name="upload_submit" value="Upload Image" \>
+					</form>
+				</div>
+			</div>			
 		</div>
 		<!-- Column 1 end -->
 		<div id="thumb_sidebar" class="col2">

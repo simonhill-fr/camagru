@@ -36,19 +36,15 @@ p {
 img {
 	margin:10px 0 5px;
 }
-#ads img {
-	display:block;
-	padding-top:10px;
-}
 
-/* Header styles */
+/* --- Header styles --- */
 #header {
 	clear:both;
 	float:left;
 	width:100%;
 }
 #header {
-	border-bottom:1px solid #000;
+	border-bottom:1px solid #dbdbdb;
 }
 #header p,
 #header h1,
@@ -61,7 +57,7 @@ img {
 	float:left;
 	width:100%;
 	list-style:none;
-	margin:10px 0 0 0;
+	margin: 0 0 0 0;
 	padding:0;
 }
 #header ul li {
@@ -95,6 +91,7 @@ img {
 #header ul li a span {
 	display:block;
 }
+
 /* 'widths' sub menu */
 #layoutdims {
 	clear:both;
@@ -156,6 +153,7 @@ img {
 	margin:0;
 }
 
+/*	--- The Create Page ---*/
 .delbtn {
 	position: relative;
 	width: 32px;
@@ -163,28 +161,54 @@ img {
 	top: -40px;
 	z-index: 10;
 	background: url(./images/cross-flat/32x32.png);
-/*	background-color: hsla(120, 100%, 50%, 0.2);
-*/    border: none;
+    border: none;
 	opacity: .4;
     border-radius: 100%;
     color: white;
-    /*padding: 0px;*/
     text-decoration: none;
     cursor: pointer;
     display: inline;
 }
-
 .delbtn:hover {
 	opacity: .8;
 }
-
+/* png filter selection*/
 .filters {
 	border: 1px solid #ddd;
 }
-
+/* hide radio buttons*/
 #r1, #r2, #r3 {
 	visibility: hidden;
 }
+
+/* --- Feed Posts --- */
+.feed_post {
+	border:1px solid #dbdbdb;
+	width: 33%;
+	max-width: 600px;
+	margin-bottom: 40px;
+}
+.user_post {
+	text-align: left;
+	font-family: 'Poiret One', cursive;
+	font-size: 18px;
+	font-weight: bold;
+	padding: 18px
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
