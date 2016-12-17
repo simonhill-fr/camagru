@@ -33,9 +33,6 @@ p {
 	margin:.4em 0 .8em 0;
 	padding:0;
 }
-img {
-	margin:10px 0 5px;
-}
 
 /* --- Header styles --- */
 #header {
@@ -184,20 +181,41 @@ img {
 /* --- Feed Posts --- */
 .feed_post {
 	border:1px solid #dbdbdb;
+	border-radius: 3px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 2px 2px 0 rgba(0, 0, 0, 0.019);
 	width: 33%;
-	max-width: 600px;
-	margin-bottom: 40px;
+/*	max-width: 600px;
+*/	margin: 50px 0px;	
 }
-.user_post {
+.username {
 	text-align: left;
 	font-family: 'Poiret One', cursive;
 	font-size: 18px;
 	font-weight: bold;
-	padding: 18px
+	padding: 18px;
+	border-bottom :1px solid #dbdbdb;
 
 }
+.feed_img_del	{
+	display: inline-block;
+	width: 40%;
 
+}
+.post_likes	{
+	display: inline-block;
+	width: 40%;
+	text-align: left;
 
+	font-family: 'Poiret One', cursive;
+	margin:.4em 0 .8em 12;
+	padding:0;
+}
+.comment	{
+	width: 100%;
+}
+#comment_text	{
+	width: 66%;
+}
 
 
 

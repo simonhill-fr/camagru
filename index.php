@@ -1,7 +1,7 @@
 <?php 
 session_start();
-include 'config/setup.php';
-include 'tools/database_operations.php';
+include_once 'config/setup.php';
+include_once 'tools/database_operations.php';
 	/*REMOVE */
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL | E_STRICT);

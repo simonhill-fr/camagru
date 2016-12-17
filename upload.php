@@ -19,7 +19,7 @@ function create_fly_picture($fileData, $filter_source){
 	imagedestroy($bottom);
 
 	$db = db_connection();
-	$sql = "INSERT INTO pictures 
+	$sql = "INSERT INTO pictures (id, user_id, timestamp, path)
 	VALUES ('0', '".$_SESSION['user_id']."', '".time()."', '".$filePath."')";
 
 	if ($db->exec($sql))
