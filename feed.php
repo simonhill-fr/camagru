@@ -7,26 +7,26 @@
 <div class="colmask ">
 		<div class="colmid">
 			<!-- Column 1 start -->
-			<h2 style="text-align: center">Welcome</h2>
-			<div align="center">
+			<!-- <div > -->
 				
 <?php
 
-$post = new Feed_Gallery();
-$i = 0;
-$total_pages = $post->total / 10;
-
-while ($i < 10)
-{
-	while ($i < 10)
-	{
-		include 'post.php';
-		$post->key++;
-		$i++;
-	}
+try {
+	$post = new Feed_Gallery();
+	$i = 0;
+	$total_pages = $post->total / 10;
+	while ($i < $post->total)
+		{
+			include 'post.php';
+			$post->key++;
+			$i++;
+		}
+} catch (Exception $e) {
+	echo $e->getMessage();
 }
+
 ?>
-			</div>			
+			<!-- </div> -->			
 		</div>
 		<!-- Column 1 end -->
 </div>

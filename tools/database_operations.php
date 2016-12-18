@@ -29,8 +29,8 @@ Class Connection {
 			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		} 
 		catch (PDOException $e) {
-			echo 'Database not found, creating new db <br> ';
-			create_db();
+			header("Location: ../error.php?ernum=1");
+			
 		}
 		$this->handle = $dbh;
 	}
@@ -44,7 +44,6 @@ Class Connection {
 
 	function simplequery($sql)	{
 		return ($this->handle->exec($sql));
-
 	}
 }
 

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once 'tools/database_operations.php';
 
 $db = new Connection();
@@ -17,7 +17,7 @@ if (isset($_POST["submit_comment"]))
 		$pic_id = $_POST["pic_id"];
 		$user_id = $_SESSION["user_id"];
 		$sql = "INSERT INTO comments (pic_id, user_id, timestamp, text)
-				VALUES ('".$pic_id."', '5', '".time()."', '".$text."' )";
+				VALUES ('".$pic_id."', '".$_SESSION['user_id']."', '".time()."', '".$text."' )";
 		if (!($db->simplequery($sql)))
 			array_push($error, "SQL request error");
 		$db = NULL;

@@ -27,8 +27,8 @@ function db_connection() {
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} 
 	catch (PDOException $e) {
-		echo 'Database not found, creating new db <br> ';
-		create_db();
+		header("Location: error.php?ernum=1");;
+		//create_db();
 	}
 	return ($dbh);
 }
