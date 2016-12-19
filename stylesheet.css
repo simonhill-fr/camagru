@@ -151,6 +151,7 @@ form {
 	float:left;
 	width:100%;
 	border-top:1px solid #000;
+	background: black;
 }
 #footer p {
 	padding:10px;
@@ -192,7 +193,6 @@ form {
 	border-radius: 3px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 2px 2px 0 rgba(0, 0, 0, 0.019);
 	max-width: 550px;
-	margin: auto;
 	margin: 50px auto;	
 }
 .username {
@@ -249,8 +249,19 @@ form {
 #comment_form_input	{
 	width: 30%;
 }
-
-
+.pagination	{
+	background: #fff;
+	border:1px solid #dbdbdb;
+	border-radius: 3px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 2px 2px 0 rgba(0, 0, 0, 0.019);
+	max-width: 550px;
+	margin: 50px auto;
+	text-align: center;	
+	font-family: 'Comfortaa', cursive;
+}
+#page_digit	{
+	padding: 5px;
+}
 
 
 

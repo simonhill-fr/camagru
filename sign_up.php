@@ -12,12 +12,17 @@ if (isset($_POST["submit"]) && $_POST["submit"] === "OK")
 		array_push($error, "Login must be 16 characters max and contain only letters and numbers");
 	else if (preg_match("/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/", strtoupper($_POST["email"])) == FALSE)
 		array_push($error, $_POST["passwd"] . " is not a valid email adress" );
-	else if (preg_match("/\b.{1,}\b/", $_POST["passwd"]) == FALSE)
-		array_push($error, "Password must contains 8-32 characters");
+	else if (preg_match("/\b.{4,}\b/", $_POST["passwd"]) == FALSE)
+		array_push($error, "Password must contains 4-32 characters");
 
 	if (!$error)
 	{        
 		$user = db_array_fetchAll("SELECT * FROM users WHERE login='".$_POST["login"]."'");
+		if ($user)
+			array_push($error, "This login is already taken\n");
+		$user = db_array_fetchAll("SELECT * FROM users WHERE email='".$_POST["email"]."'");
+		if ($user)
+			array_push($error, "There is already an account associated to this email. Try loggin in.\n");
 		if (!$user)
 		{
 			$login = $_POST["login"];
@@ -31,8 +36,6 @@ if (isset($_POST["submit"]) && $_POST["submit"] === "OK")
 			if (!send_activation_email($email, $login, $activation))
 				array_push($error, "Error: Could not send mail");			
 		}
-		else 
-			array_push($error, "This login is already taken\n");
 	}
 	if ($error){
 		$_POST["submit"] = "error";

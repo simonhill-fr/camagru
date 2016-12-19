@@ -21,11 +21,13 @@ if ($_POST["submit"] == "OK")
 		$db = db_connection();
 		$search = $db->prepare("SELECT * FROM users 
 			WHERE login='".$_POST["login"]."' 
-			AND passwd='".$hash_passwd."'");
+			AND passwd='".$hash_passwd."'
+			AND status='active'
+			");
 		$search->execute();
 		$match = $search->fetchAll();
 		if (!$match)
-			array_push($error, "Login / password mismatch");
+			array_push($error, "Make sure login and password are correct and that your account is activated");
 		$db = NULL;
 		
 	}

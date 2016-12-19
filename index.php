@@ -14,8 +14,13 @@ require_once 'model/db_query.php';
 	<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
 	<link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+	<noscript>
+		<h1><center>Javascript is disabled. You need to enable it to run Camagru</center></h1>
+		<style type="text/css"> #main_content {display: none;} </style>
+	</noscript>
 </head>
-<body>
+<body><div id="main_content">
+
 
 <div id="header">
 	
@@ -33,19 +38,18 @@ require_once 'model/db_query.php';
 
 if (isset($_GET["page"]))
 {
-	if ($_GET["page"] == "create")
+	if ($_GET["page"] == "create" && isset($_SESSION["user"]) && $_SESSION["user"] !== "")
 		include "create.php";
+	else if ($_GET["page"] == "create" && (!isset($_SESSION["user"]) || $_SESSION["user"] === ""))
+		include 'please_login.php';
 }
 else
 	include "feed.php";
 
 ?>
 <div id="footer">
-	<p style="text-align: center;"> (c) shill 2016 </p>
+	<p style="text-align: center; color: #dbdbdb;"> by shill - 2016 </p>
 </div>
 
-</body>
-
-
-
+</div></body>
 </html>
