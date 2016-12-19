@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config/setup.php';
+require_once 'model/db_query';
 
 function send_reset_email($email, $reset_key)
 {

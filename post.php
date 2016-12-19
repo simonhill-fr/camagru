@@ -4,7 +4,7 @@
 	</div>
 	<img src="<?php echo $post->img_path(); ?>" width="100%" \>
 	
-	<div class="post_likes">
+	<div id="TotalNumberOfLikes" class="post_likes">
 		<?php echo $post->count_likes(); ?> Like
 	</div>
 	<?php if ($post->belongs_to_user()) include 'feed_delete_img.php' ?>
@@ -19,9 +19,9 @@
 	</div>
 	<div class="like_form">
 		<form action="./like_form.php" method="post">
-			<input type="hidden" name="like_status" value="<?php echo $post->get_like_status() ?>">
-			<input type="hidden" name="pic_id" value="<?php echo $post->get_img_id() ?>">
-			<button type="submit" name="submit_like"></button>
+			<input id="like_status" type="hidden" name="like_status" value="<?php echo $post->get_like_status() ?>">
+			<input id="like_pic_id" type="hidden" name="pic_id" value="<?php echo $post->get_img_id() ?>">
+			<button type="submit" name="submit_like" ></button>
 		</form>
 
 	</div>

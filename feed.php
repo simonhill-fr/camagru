@@ -1,6 +1,5 @@
 <?php 
-	require_once '/Users/shill/http/MyWebSite/camagru/config/setup.php';
-	require_once '/Users/shill/http/MyWebSite/camagru/tools/database_operations.php';
+	require_once 'model/db_query.php';
 	require_once 'model/Feed_Gallery.php';
 ?>
 

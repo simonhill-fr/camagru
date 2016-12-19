@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'tools/database_operations.php';
+require_once 'model/db_query.php';
 
 $db = new Connection();
 

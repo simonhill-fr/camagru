@@ -1,5 +1,18 @@
 <?php
 
+function db_connection() {
+
+	require 'config/database.php';
+	try {
+		$dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	} 
+	catch (PDOException $e) {
+		header("Location: error.php?ernum=1");
+	}
+	return ($dbh);
+}
+
 function db_array_fetchAll($sql)
 {
 	$db = db_connection();
@@ -8,7 +21,6 @@ function db_array_fetchAll($sql)
 	$result_array = $search->fetchAll();
 	$db = NULL;
 	return ($result_array);
-
 }
 
 function db_execute($sql)

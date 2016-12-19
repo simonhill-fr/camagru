@@ -1,7 +1,6 @@
 <?php 
 session_start();
-include_once 'config/setup.php';
-include_once 'tools/database_operations.php';
+require_once 'model/db_query.php';
 	/*REMOVE */
 	ini_set('display_errors', 'On');
 	error_reporting(E_ALL | E_STRICT);
@@ -47,6 +46,6 @@ else
 
 </body>
 
-<script src="js/takepicture.js"></script>
+
 
 </html>

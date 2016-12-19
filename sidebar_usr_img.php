@@ -8,8 +8,7 @@ if (session_status() == PHP_SESSION_NONE) {
 <body>
 <?php 
 
-require_once '/Users/shill/http/MyWebSite/camagru/config/setup.php';
-require_once '/Users/shill/http/MyWebSite/camagru/tools/database_operations.php';
+require_once '/Users/shill/http/MyWebSite/camagru/model/db_query.php';
 
 echo "Latests pics :";
 $sql = "SELECT path FROM pictures 

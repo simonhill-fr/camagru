@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config/setup.php';
+include 'model/db_query.php';
 
 function no_match()
 {

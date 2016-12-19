@@ -1,7 +1,6 @@
 <?php
 session_start();
-include 'config/setup.php';
-include 'tools/database_operations.php';
+include 'model/db_query.php';
 ?>
 <!DOCTYPE html>
 <html>

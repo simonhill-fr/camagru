@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'config/setup.php';
+require_once 'model/db_query.php';
 
 if (isset($_GET["email"]) && isset($_GET["key"]))
 {

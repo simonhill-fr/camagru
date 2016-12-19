@@ -1,36 +1,19 @@
 <?php
 
-function create_db() {
+require 'database.php';
 
-	$db = "db_camagru";
+$path = "../../../bin/mysql ";
 
-	$dbh = new PDO("mysql:host=localhost","","");
-	$dbh->exec("CREATE DATABASE `$db`;");
+$query = "
+	DROP DATABASE IF EXISTS db_camagru;
+	CREATE DATABASE db_camagru;
+	use db_camagru;
+	SOURCE db_camagru.sql;
+	";
 
-	/*$sql = "CREATE TABLE `db_camagru`.`user` ( `id` INT NOT NULL AUTO_INCREMENT , `login` VARCHAR(255) NOT NULL , `email` VARCHAR(255) NOT NULL , `passwd` VARCHAR(255) NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB;";
+$cmd = $path
+	. "--execute='".$query."'";
 
+echo shell_exec($cmd);
 
-	if ($dbh->exec($sql))
-	{}
-	else {
-		echo "this is a failure<br>";
-	}*/
-
-	echo "created db";
-}
-
-function db_connection() {
-
-	include 'database.php';
-	try {
-		$dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	} 
-	catch (PDOException $e) {
-		header("Location: error.php?ernum=1");;
-		//create_db();
-	}
-	return ($dbh);
-}
-
-db_connection();
+?>

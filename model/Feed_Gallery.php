@@ -2,7 +2,7 @@
 
 /*	Get images and info from pictures table	*/
 
-require_once 'tools/database_operations.php';
+require_once 'model/db_query.php';
 
 Class Feed_Gallery {
 
