@@ -1,14 +1,16 @@
 <?php
+session_start();
+require_once "model/db_query.php";
 
 function create_fly_picture($fileData, $filter_source){
 	
 	// Load the stamp layer and bottom layer
 	$stamp = imagecreatefrompng($filter_source);
-	$bottom = imagecreatefromstring($fileData);
+	$bottom = imagecreatefrompng($fileData);
 
 	// Get width and height of bottom layer
-	$bottom_width = imagesx($bottom);
-	$bottom_height = imagesy($bottom);
+	$bottom_width = imagesx($stamp);
+	$bottom_height = imagesy($stamp);
 
 	// Copy stamp on bottom layer
 	imagecopy($bottom, $stamp, 0, 0, 0, 0, $bottom_width, $bottom_height);
@@ -23,53 +25,64 @@ function create_fly_picture($fileData, $filter_source){
 	VALUES ('0', '".$_SESSION['user_id']."', '".time()."', '".$filePath."')";
 
 	if ($db->exec($sql))
-	{}
+		return true;
 	else
-		echo "db error";
-	
-	}
-
+		return false;	
+}
 
 $imageFileType = pathinfo($_FILES["imgToUpload"]["name"], PATHINFO_EXTENSION);
 $target_dir = "uploads/";
 $target_file = $target_dir . uniqid() . "." . $imageFileType;
-$uploadOk = 1;
 
-if (isset($_POST["upload_submit"]))
+$error = array();
+if (isset($_POST["upload_submit"])
+	&& isset($_FILES["imgToUpload"]["tmp_name"])
+	&& !empty($_FILES["imgToUpload"]["tmp_name"]) 
+	&& isset($_POST["upload_filter"])
+	&& !empty($_POST["upload_filter"]))
 {
-	$error = array();
-	if (!($check = getimagesize($_FILES["imgToUpload"]["tmp_name"])));
+	$check = getimagesize($_FILES["imgToUpload"]["tmp_name"]);
+	if ($check === false)
 		array_push($error, "File is not an image");
+	$check = getimagesize($_POST["upload_filter"]);
+	if ($check === false)
+		array_push($error, "Filter is not an image");
 }
+else
+	array_push($error, "Please fill all the fields");
 
 //	check if file exists 
 if (file_exists($target_file))
 {
-	echo "File exists";
-	$uploadOk = 0;
+	array_push($error, "File exists");
 }
 //	check file size
 if ($_FILES["imgToUpload"]["size"] > 500000)
 {
-	$uploadOk = 0;
-	echo "File too large";
+	array_push($error, "File too large");
 }
 //file format
 if ($imageFileType != "jpg" && $imageFileType != "jpeg" 
 	&& $imageFileType != "png" && $imageFileType != "gif")
 {
-	$uploadOk = 0;
-	echo "Wrong type";
+	array_push($error, "Wrong type");
 }
-if ($uploadOk)
+if (!$error)
 {
 	$fileData = $_FILES["imgToUpload"]["tmp_name"];
-
-
+	if (!create_fly_picture($fileData, $_POST["upload_filter"]))
+		array_push($error, "Error editing");
+}
+if ($error)
+{
+	$_SESSION["error"] = $error[0];
 }
 
+header("Location: http://localhost:8080/camagru/?page=create");
 
 
+
+?>
 
 
 

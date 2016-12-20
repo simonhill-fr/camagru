@@ -111,8 +111,11 @@ function imgSelect(x) {
 	but2.style.background = "none";
 	but3.style.background = "none";
 	x.style.background="lightgreen";
+	//	enable button :
 	document.getElementById("startbutton").disabled = false;
-
+	//	set filter value for upload form :
+	document.getElementById("upload_filter").value = x.src;
+	console.log(document.getElementById("upload_filter").value);
 }
 
 function deleteImg(xthis) {

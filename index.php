@@ -48,7 +48,7 @@ else
 
 ?>
 <div id="footer">
-	<p style="text-align: center; color: #dbdbdb;"> by shill - 2016 </p>
+	<p style="text-align: center; color: #dbdbdb;"> shill - 2016 </p>
 </div>
 
 </div></body>

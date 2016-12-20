@@ -1,22 +1,23 @@
 <?php
 session_start();
-require_once 'model/db_query';
+require_once 'model/db_query.php';
 
-function send_reset_email($email, $reset_key)
+function send_reset_email($email, $new_passwd)
 {
 	$to = $email;
 	$subject = "Forgotten password";
-	$link = "http://localhost:8080/camagru/reset.php/?email=".$email."&key=".$reset_key."";
 	$message = "
-	Hello, please click on the link below to reset password : <br>\n
-	<a href='".$link."' target='_blank'> Reset Password </a>
+	Hello, this is your new password : <br>\n
+	".$new_passwd."
 	";
 	$headers  = "From: camagru < noreply@camagru.com >\r\n";
     $headers .= "MIME-Version: 1.0\r\n";
     $headers .= "Content-Type: text/html; charset=iso-8859-1\r\n";
 	$sent = mail($to, $subject, $message, $headers);
 	if (!$sent)
-		echo "Error sending email";
+		return (false);
+	else
+		return (true);
 }
 
 function no_match()
@@ -34,21 +35,27 @@ if ($_POST["submit"] == "OK")
 		array_push($error, "You need to fill in all the fields\n");
 	if (!$error)
 	{
-		$db = db_connection();
-		$search = $db->prepare("SELECT * FROM users 
-			WHERE email='".$_POST["email"]."'");
-		$search->execute();
-		$match = $search->fetchAll();
+		$sql = "
+			SELECT * FROM users
+			WHERE email='".$_POST["email"]."'
+			";
+		$match = db_array_fetchAll($sql);
 		if (!$match)
 			array_push($error, "No such email in db, remove this message");
 		else
 		{
-			$reset_key = md5(uniqid(rand(0,1000)));
-			$db->exec("UPDATE users SET reset_key = '".$reset_key."' WHERE email='".$_POST["email"]."'");
-			send_reset_email($_POST["email"], $reset_key);
-			$db = NULL;
-		}
-		
+			$new_passwd = substr(md5(microtime()),rand(0,26),8);
+			$new_passwd_hash = hash("whirlpool", $new_passwd);
+			$sql = "
+				UPDATE users
+				SET passwd = '".$new_passwd_hash."'
+				WHERE email='".$_POST["email"]."'
+				";
+			if (!db_execute($sql))
+				array_push($error, "Error updating database");
+			if (!send_reset_email($_POST["email"], $new_passwd))
+				array_push($error, "Error sending email");
+		}		
 	}
 	if ($error)
 	{
@@ -57,8 +64,7 @@ if ($_POST["submit"] == "OK")
 	}
 	else
 	{
-
-		echo "mail sent";
+		header("Location: log_in.php");
 	}
 
 }	
@@ -66,12 +72,11 @@ if ($_POST["submit"] == "OK")
 ?>
 <html>
 <head>
-		<!-- <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-		<title>Camagru - Log in</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Camagru - Forgotten Password</title>
 		<link rel="stylesheet" type="text/css" href="./signup.css">
-		<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'> -->
-		<!-- <link rel="stylesheet" href="css/main.css"> -->
+		<link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
 
@@ -80,7 +85,7 @@ if ($_POST["submit"] == "OK")
 			<h1>Enter account email</h1>
 			
 			<fieldset>
-				<legend><span class="number">1</span><?php no_match(); ?></legend>
+				<legend><?php no_match(); ?></legend>
 				<label for="name">Email:</label>
 				<input type="text" name="email">
 			

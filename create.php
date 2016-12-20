@@ -2,6 +2,17 @@
 
 <?php 
 
+function put_create_error()
+{
+	if (isset($_SESSION["error"]))
+	{
+		$ret = $_SESSION["error"];
+		$_SESSION["error"] = "";
+		unset($_SESSION["error"]);
+		echo $ret;
+	}
+}
+
 if (isset($_POST["img_data"]) && $_POST["img_data"] !== ""
 	&& isset($_POST["filter"]) && $_POST["filter"] )
 {
@@ -51,8 +62,10 @@ if (isset($_POST["img_delete"])) {
 				<div>
 					<form action="upload.php" method="post" enctype="multipart/form-data">
 					<h3> or Upload picture </h3>
+					<div class="error"><?php put_create_error(); ?></div>
+					<input id="upload_filter" type="hidden" name="upload_filter" >
 					<input type="file" name="imgToUpload" id="imgToUpload" \>
-					<input type="submit" name="upload_submit" value="Upload Image" \>
+					<input id="uploadbutton" type="submit" name="upload_submit" value="Upload Image" >
 					</form>
 				</div>
 			</div>			

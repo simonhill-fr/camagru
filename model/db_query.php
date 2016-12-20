@@ -3,8 +3,10 @@
 function db_connection() {
 
 	require 'config/database.php';
+	$dbh = NULL;
 	try {
 		$dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
+		//$dbh>setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} 
 	catch (PDOException $e) {
