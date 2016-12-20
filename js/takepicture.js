@@ -115,7 +115,6 @@ function imgSelect(x) {
 	document.getElementById("startbutton").disabled = false;
 	//	set filter value for upload form :
 	document.getElementById("upload_filter").value = x.src;
-	console.log(document.getElementById("upload_filter").value);
 }
 
 function deleteImg(xthis) {

@@ -6,7 +6,7 @@ include 'tools/email_operations.php';
 if (isset($_POST["submit"]) && $_POST["submit"] === "OK")
 {
 	$error = array();
-	if (!$_POST["login"] || !$_POST["passwd"] || !$_POST["email"]) //add regexp here
+	if (!$_POST["login"] || !$_POST["passwd"] || !$_POST["email"])
 	array_push($error, "You need to fill in all the fields\n");
 	else if (preg_match("/^[a-zA-Z0-9_]{1,16}$/", $_POST["login"]) == FALSE)
 		array_push($error, "Login must be 16 characters max and contain only letters and numbers");
@@ -16,22 +16,30 @@ if (isset($_POST["submit"]) && $_POST["submit"] === "OK")
 		array_push($error, "Password must contains 4-32 characters");
 
 	if (!$error)
-	{        
-		$user = db_array_fetchAll("SELECT * FROM users WHERE login='".$_POST["login"]."'");
+	{
+		//	sanitize inputs :
+		$login = filter_input(INPUT_POST, "login", FILTER_SANITIZE_STRING);
+		$email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
+		
+		//	check if login exists :
+		$sql = " SELECT * FROM users WHERE login=:login ";
+		$user = db_array_fetchAll($sql, array('login' => $login));
 		if ($user)
 			array_push($error, "This login is already taken\n");
-		$user = db_array_fetchAll("SELECT * FROM users WHERE email='".$_POST["email"]."'");
+		
+		//	check if email exists :
+		$sql = " SELECT * FROM users WHERE email=:email ";
+		$user = db_array_fetchAll($sql, array('email' => $email));
 		if ($user)
 			array_push($error, "There is already an account associated to this email. Try loggin in.\n");
 		if (!$user)
 		{
-			$login = $_POST["login"];
-			$email = $_POST["email"];
 			$passwd = hash("whirlpool", $_POST["passwd"]);
 			$activation = md5(uniqid(rand(0,1000)));
-			$sql = "INSERT INTO users 
-			VALUES ('0', '".$login."', '".$email."', '".$passwd."', '".$activation."', 'pending', '')";
-			if (!db_execute($sql))
+			$sql = "
+				INSERT INTO users 
+				VALUES ('0', :login, :email, '".$passwd."', '".$activation."', 'pending', '')";
+			if (!db_execute($sql, array('login' => $login, 'email' => $email)))
 				array_push($error, "Error: Could not add user to db\n");
 			if (!send_activation_email($email, $login, $activation))
 				array_push($error, "Error: Could not send mail");			

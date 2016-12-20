@@ -5,9 +5,7 @@ include 'model/db_query.php';
 function no_match()
 {
 	if ($_POST && $_POST["submit"] === "error")
-	{
 		echo $_POST["submit_err"];
-	}
 }
 
 if ($_POST["submit"] == "OK")
@@ -18,18 +16,17 @@ if ($_POST["submit"] == "OK")
 	if (!$error)
 	{
 		$hash_passwd = hash("whirlpool", $_POST["passwd"]);
-		$db = db_connection();
-		$search = $db->prepare("SELECT * FROM users 
-			WHERE login='".$_POST["login"]."' 
-			AND passwd='".$hash_passwd."'
+		$login = filter_input(INPUT_POST, "login", FILTER_SANITIZE_STRING);
+		$sql = "
+			SELECT * FROM users
+			WHERE login=:login 
+			AND passwd=:hash_passwd
 			AND status='active'
-			");
-		$search->execute();
-		$match = $search->fetchAll();
+			";
+		$sql_args = array('login' => $login, 'hash_passwd' => $hash_passwd);
+		$match = db_array_fetchAll($sql, $sql_args);
 		if (!$match)
 			array_push($error, "Make sure login and password are correct and that your account is activated");
-		$db = NULL;
-		
 	}
 	if ($error)
 	{
@@ -42,21 +39,18 @@ if ($_POST["submit"] == "OK")
 		$_SESSION["user_id"] = $match["0"]["id"];
 		header("Location: ./");
 	}
-
 }	
 
 ?>
 <html>
 <head>
-		<!-- <meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Camagru - Log in</title>
 		<link rel="stylesheet" type="text/css" href="./signup.css">
-		<!-- <link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'> -->
-		<!-- <link rel="stylesheet" href="css/main.css"> -->
+		<link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
 	</head>
 	<body>
-
 		<form action="./log_in.php" method="post">
 			
 			<h1>Log in</h1>
@@ -73,8 +67,4 @@ if ($_POST["submit"] == "OK")
 			<button type="submit" name="submit" value="OK">Log in</button>
 			<a href="./sign_up.php"> Don't have an account ? </a>
 		</form>
-
 	</body></html>
-
-
-

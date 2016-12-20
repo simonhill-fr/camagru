@@ -16,9 +16,13 @@ Class Feed_Gallery {
 	public	$liked_by_user;
 
 	function __construct() {
-		$this->db = new Connection();
-		$sql = "SELECT path, user_id, comment_ids, likes, id FROM pictures ORDER BY timestamp DESC";
-		$this->pic_array = $this->db->db_array_fetchAll($sql);
+		$sql = "
+			SELECT path, user_id, comment_ids, likes, id
+			FROM pictures
+			ORDER BY timestamp
+			DESC
+			";
+		$this->pic_array = db_array_fetchAll($sql, NULL);
 		if (!$this->pic_array)
 			throw new Exception("The feed is empty", 1);
 		$this->total = count($this->pic_array);
@@ -37,8 +41,11 @@ Class Feed_Gallery {
 			return false;
 	}
 	function get_username()	{
-		$sql = "SELECT login FROM users WHERE id='".$this->pic_array[''.$this->key.'']['user_id']."' ";
-		$users = $this->db->db_array_fetchAll($sql);
+		$sql = "
+			SELECT login
+			FROM users
+			WHERE id='".$this->pic_array[''.$this->key.'']['user_id']."' ";
+		$users = db_array_fetchAll($sql, NULL);
 		if (!$users)
 			throw new Exception("Error: No user to match this picture", 1);
 		return $users['0']['login'];
@@ -54,12 +61,12 @@ Class Feed_Gallery {
 	}
 	function get_comments()	{
 		$sql = "
-		SELECT pic_id, login, text
-		FROM comments
-		INNER JOIN users ON comments.user_id=users.id
-		WHERE comments.pic_id='".$this->pic_array[''.$this->key.'']['id']."'
-		ORDER BY comments.timestamp ASC";
-		$this->comment_array = $this->db->db_array_fetchAll($sql);
+			SELECT pic_id, login, text
+			FROM comments
+			INNER JOIN users ON comments.user_id=users.id
+			WHERE comments.pic_id='".$this->pic_array[''.$this->key.'']['id']."'
+			ORDER BY comments.timestamp ASC";
+		$this->comment_array = db_array_fetchAll($sql, NULL);
 		if ($this->comment_array === false)
 			throw new Exception("DB Error retrieving comments", 1);
 		return ($this->comment_array);
@@ -73,7 +80,7 @@ Class Feed_Gallery {
 				WHERE likes.pic_id='".$this->pic_array[''.$this->key.'']['id']."'
 				AND likes.user_id='".$user_id."'
 				";
-			$search = $this->db->db_array_fetchAll($sql);
+			$search = db_array_fetchAll($sql, NULL);
 			if ($search === false)
 				throw new Exception("DB Error getting like status", 1);
 			if ($search)
@@ -87,10 +94,10 @@ Class Feed_Gallery {
 
 	function count_likes()	{
 		$sql = "
-		SELECT * FROM likes
-		WHERE likes.pic_id='".$this->pic_array[''.$this->key.'']['id']."'
-		";
-		$count_likes = $this->db->db_array_fetchAll($sql);
+			SELECT * FROM likes
+			WHERE likes.pic_id='".$this->pic_array[''.$this->key.'']['id']."'
+			";
+		$count_likes = db_array_fetchAll($sql, NULL);
 		if ($count_likes === false)
 			throw new Exception("DB Error getting likes count", 1);
 		if (!$count_likes)

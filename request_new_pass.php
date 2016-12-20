@@ -35,11 +35,12 @@ if ($_POST["submit"] == "OK")
 		array_push($error, "You need to fill in all the fields\n");
 	if (!$error)
 	{
+		$email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL);
 		$sql = "
 			SELECT * FROM users
-			WHERE email='".$_POST["email"]."'
+			WHERE email=:email
 			";
-		$match = db_array_fetchAll($sql);
+		$match = db_array_fetchAll($sql, array('email' => $email));
 		if (!$match)
 			array_push($error, "No such email in db, remove this message");
 		else
@@ -49,11 +50,11 @@ if ($_POST["submit"] == "OK")
 			$sql = "
 				UPDATE users
 				SET passwd = '".$new_passwd_hash."'
-				WHERE email='".$_POST["email"]."'
+				WHERE email=:email
 				";
-			if (!db_execute($sql))
+			if (!db_execute($sql, array('email' => $email)))
 				array_push($error, "Error updating database");
-			if (!send_reset_email($_POST["email"], $new_passwd))
+			if (!send_reset_email($email, $new_passwd))
 				array_push($error, "Error sending email");
 		}		
 	}

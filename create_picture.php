@@ -23,13 +23,13 @@ function create_picture($filter_source){
 	imagepng($bottom, $filePath);
 	imagedestroy($bottom);
 
-	$db = db_connection();
-	$sql = "INSERT INTO pictures (id, user_id, timestamp, path)
-	VALUES ('0', '".$_SESSION['user_id']."', '".time()."', '".$filePath."')";
+	//$db = db_connection();
+	$sql = "
+		INSERT INTO pictures (id, user_id, timestamp, path)
+		VALUES ('0', '".$_SESSION['user_id']."', '".time()."', '".$filePath."')
+		";
 
-	if ($db->exec($sql))
-	{}
-	else
+	if (!db_execute($sql, NULL))
 		echo "db error";
 	
 	}

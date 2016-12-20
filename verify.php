@@ -19,24 +19,25 @@ include 'model/db_query.php';
 			array_push($error, "Activation code error : wrong code url");
 		if (!$error)
 		{
-			$sql = "SELECT * FROM users WHERE login='".$_GET["login"]."' AND activation='".$_GET["key"]."'";
-			$match = db_array_fetchAll($sql);
+			$sql = "
+				SELECT * FROM users
+				WHERE login='".$_GET["login"]."'
+				AND activation='".$_GET["key"]."'";
+			$match = db_array_fetchAll($sql, NULL);
 			if (!$match)
 				array_push($error, "Activation code error : no match");
 			else if ($match["0"]["status"] === "active")
 				array_push($error, "Your account is already activated");
 			else if (!mkdir("./user_img/" . $match[0][0]))
 				array_push($error, "Error creating user folder");
-			else if (!db_execute("UPDATE users SET status='active', activation = '' WHERE login='".$_GET["login"]."'"))
+			else if (!db_execute("UPDATE users SET status='active', activation = '' WHERE login='".$_GET["login"]."'", NULL))
 				array_push($error, "Error updating database");
 			else
-			{
 				include 'view/email_verify_success.html';
-			}
-}
-if ($error)
-	echo $error[0];	
-}
+		}
+		if ($error)
+			echo $error[0];	
+	}
 
 ?>
 </body>

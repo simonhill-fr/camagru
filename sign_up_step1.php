@@ -26,32 +26,3 @@ function username_exist()
 	</fieldset>
 	<button type="submit" name="submit" value="OK">Sign Up</button>
 </form>
-
-
-
-
-<?php  
-
-/*
-<form action="./sign_up.php" method="post">
-	  
-		<h1>Sign Up</h1>
-		
-		<fieldset>
-		  <legend><span class="number">1</span><?php username_exist(); ?></legend>
-		  <label for="name">Login:</label>
-		  <input type="text" id="name" name="login">
-		  
-		  <label for="mail">Email:</label>
-		  <input type="email" id="mail" name="email">
-		  
-		  <label for="password">Password:</label>
-		  <input type="password" id="password" name="passwd">
-		  
-		</fieldset>
-		 <button type="submit" name="submit" value="OK">Sign Up</button>
-	  </form>
-*/
-
-
-?>

@@ -6,7 +6,7 @@ function db_connection() {
 	$dbh = NULL;
 	try {
 		$dbh = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-		//$dbh>setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} 
 	catch (PDOException $e) {
@@ -15,50 +15,23 @@ function db_connection() {
 	return ($dbh);
 }
 
-function db_array_fetchAll($sql)
+function db_array_fetchAll($sql, $sql_args)
 {
 	$db = db_connection();
-	$search = $db->prepare($sql);
-	$search->execute();
-	$result_array = $search->fetchAll();
+	$stmt = $db->prepare($sql);
+	$stmt->execute($sql_args);
+	$result_array = $stmt->fetchAll();
 	$db = NULL;
 	return ($result_array);
 }
 
-function db_execute($sql)
+function db_execute($sql, $sql_args)
 {
 	$db = db_connection();
-	$ret = $db->exec($sql);
+	$stmt = $db->prepare($sql);
+	$ret = $stmt->execute($sql_args);
 	$db = NULL;
 	return ($ret);
-}
-
-Class Connection {
-	
-	public	$handle = NULL;
-
-	function __construct()	{
-		try {
-			$dbh = new PDO("mysql:host=localhost;dbname=db_camagru", "", "");
-			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		} 
-		catch (PDOException $e) {
-			header("Location: ../error.php?ernum=1");
-			
-		}
-		$this->handle = $dbh;
-	}
-	
-	function db_array_fetchAll($sql) {
-		$search = $this->handle->prepare($sql);
-		$search->execute();
-		$result_array = $search->fetchAll();
-		return ($result_array);
-	}
-
-	function simplequery($sql)	{
-		return ($this->handle->exec($sql));
-	}
 }
 
 ?>
