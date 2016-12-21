@@ -46,4 +46,3 @@
 		<!-- Column 1 end -->
 </div>
 
-<script src="js/feed.js"></script>

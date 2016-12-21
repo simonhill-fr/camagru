@@ -4,7 +4,7 @@ body {
 	border:0;			/* This removes the border around the viewport in old versions of IE */
 	width:100%;
 	background:#fffafa;
-	min-width:600px;    	/* Minimum width of layout - remove line if not required */
+	/*min-width:600px;*/    	/* Minimum width of layout - remove line if not required */
 					/* The min-width property does not work in old versions of Internet Explorer */
 	font-size:90%;
 }
@@ -34,7 +34,8 @@ p {
 	padding:0;
 }
 form {
-	margin: auto;
+	/*margin: auto;*/
+	vertical-align: middle;
 }
 
 /* --- Header styles --- */
@@ -192,7 +193,7 @@ form {
 	border:1px solid #dbdbdb;
 	border-radius: 3px;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.02), 0 2px 2px 0 rgba(0, 0, 0, 0.019);
-	max-width: 550px;
+	width: 100%;
 	margin: 50px auto;	
 }
 .username {
@@ -216,8 +217,16 @@ form {
 	display: inline-block;
 	text-align: right;
 	width: 10%;
-
 }
+.feed_img_del_btn	{
+	width: 16px;
+	height: 16px;
+	z-index: 10;
+	border: none;
+	background: url(images/trash-var-solid/16x16.png);
+	cursor: pointer;
+}
+
 /*	--- Community Comments --- */
 .comments	{
 	padding: 10px 24px;
@@ -238,16 +247,45 @@ form {
 }
 
 /*	--- Comment form---	*/
+#like_button	{
+	width: 32px;
+	height: 32px;
+	z-index: 10;
+	border: none;
+	background: url(images/heart-outline/32x32.png);
+	cursor: pointer;
+	margin: 20px;
+}
+
 .like_form	{
 	display: inline-block;
 	width: 15%;
 }
+#button_div	{
+	display: inline-block;
+	text-align: center;
+}
+#comment_button	{
+	width: 32px;
+	height: 32px;
+	z-index: 10;
+	border: none;
+	background: url(images/chat-outline/32x32.png);
+	cursor: pointer;
+
+}
 .comment_form	{
 	display: inline-block;
-	width: 75%;
+	vertical-align: middle;
+	width: 80%;
 }
+
 #comment_form_input	{
-	width: 30%;
+	/*position: relative;*/
+
+	width: 50%;
+	height: 36px;
+	vertical-align: middle;
 }
 .pagination	{
 	background: #fff;
@@ -263,7 +301,9 @@ form {
 	padding: 5px;
 }
 
-
+@media only screen and (min-width: 1000px){
+	.feed_post {max-width: 550px;}
+}
 
 
 

@@ -17,11 +17,12 @@
 			}
 		?>	
 	</div>
-	<div class="like_form">
+<div id="bottom_div">
+	<div class="like_form"  >
 		<form action="./like_form.php" method="post">
 			<input id="like_status" type="hidden" name="like_status" value="<?php echo $post->get_like_status() ?>">
 			<input id="like_pic_id" type="hidden" name="pic_id" value="<?php echo $post->get_img_id() ?>">
-			<button type="submit" name="submit_like" ></button>
+			<button id="like_button" type="submit" name="submit_like" ></button>
 		</form>
 
 	</div>
@@ -35,7 +36,8 @@
 		<form action="./comment.php" method="post">
 			<input type="hidden" name="pic_id" value="<?php echo $post->get_img_id() ?>">
 			<input id="comment_form_input" type="text" name="comment_text">
-			<button type="submit" name="submit_comment"> Send </button>
+			<button id="comment_button" type="submit" name="submit_comment"></button>
 		</form>
 	</div>
+</div>
 </div>

@@ -57,3 +57,17 @@ function deleteImgFromFeed(xthis) {
 		setTimeout('takepicture()', 500);
 	return (false);
 }*/
+
+
+/*function putLikeColor(xthis)	{
+	console.log("enter");
+
+	if (xthis.value == 'set')	{
+		xthis.backgroundImage = "url('images/chat-outline/32x32.png')";
+		console.log("set");
+	}
+	else if (xthis.value == 'cleared')	{
+		xthis.backgroundImage = "url('images/heart-outline/32x32.png')";
+		console.log("cleared");
+	}
+}*/
