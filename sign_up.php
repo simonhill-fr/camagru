@@ -24,16 +24,16 @@ if (isset($_POST["submit"]) && $_POST["submit"] === "OK")
 		
 		//	check if login exists :
 		$sql = " SELECT * FROM users WHERE login=:login ";
-		$user = db_array_fetchAll($sql, array('login' => $login));
-		if ($user)
+		$user_login = db_array_fetchAll($sql, array('login' => $login));
+		if ($user_login)
 			array_push($error, "This login is already taken\n");
 		
 		//	check if email exists :
 		$sql = " SELECT * FROM users WHERE email=:email ";
-		$user = db_array_fetchAll($sql, array('email' => $email));
-		if ($user)
+		$user_email = db_array_fetchAll($sql, array('email' => $email));
+		if ($user_email)
 			array_push($error, "There is already an account associated to this email. Try loggin in.\n");
-		if (!$user)
+		if (!$user_login && !$user_email)
 		{
 			$passwd = hash("whirlpool", $_POST["passwd"]);
 			$activation = md5(uniqid(rand(0,1000)));
