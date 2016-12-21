@@ -4,7 +4,7 @@ function send_activation_email($email, $login, $activation)
 {
     $to = $email;
     $subject = "Validate account to complete registration";
-    $link = "http://localhost:8080/camagru/verify.php/?login=".$login."&key=".$activation."";
+    $link = $_SERVER['HTTP_HOST'] . "/camagru/verify.php/?login=".$login."&key=".$activation."";
     $message = "
     Hello ".$login." , please click on the link below to activate your account : <br>\n
     <a href='".$link."' target='_blank'> Activate </a>

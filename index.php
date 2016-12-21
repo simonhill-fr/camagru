@@ -1,10 +1,9 @@
 <?php 
 session_start();
+include 'error_report.php';
 require_once 'model/db_query.php';
-	/*REMOVE */
-	ini_set('display_errors', 'On');
-	error_reporting(E_ALL | E_STRICT);
-	/*REMOVE */
+db_connection();
+	
 ?>
 <html>
 <head>

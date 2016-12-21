@@ -47,7 +47,7 @@ Class Feed_Gallery {
 			WHERE id='".$this->pic_array[''.$this->key.'']['user_id']."' ";
 		$users = db_array_fetchAll($sql, NULL);
 		if (!$users)
-			throw new Exception("Error: No user to match this picture", 1);
+			throw new Exception("No user to match this picture", 1);
 		return $users['0']['login'];
 
 	}
@@ -99,7 +99,7 @@ Class Feed_Gallery {
 			";
 		$count_likes = db_array_fetchAll($sql, NULL);
 		if ($count_likes === false)
-			throw new Exception("DB Error getting likes count", 1);
+			throw new Exception(":( likes count", 1);
 		if (!$count_likes)
 			return ("No");
 		else

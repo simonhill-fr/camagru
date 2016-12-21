@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'error_report.php';
 require_once 'model/db_query.php';
 
 function send_reset_email($email, $new_passwd)
@@ -39,10 +40,11 @@ if ($_POST["submit"] == "OK")
 		$sql = "
 			SELECT * FROM users
 			WHERE email=:email
+			AND status='active'
 			";
 		$match = db_array_fetchAll($sql, array('email' => $email));
 		if (!$match)
-			array_push($error, "No such email in db, remove this message");
+			array_push($error, "No user associated with this email");
 		else
 		{
 			$new_passwd = substr(md5(microtime()),rand(0,26),8);

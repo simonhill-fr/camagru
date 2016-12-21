@@ -15,7 +15,7 @@ function LikeImg() {
 	if (xhttp.readyState == 0 || xhttp.readyState == 4) 
 	{
 		xhttp.onreadystatechange = updatePostLikes;
-		xhttp.open("POST", "http://localhost:8080/camagru/like_form.php", true);
+		xhttp.open("POST", "./like_form.php", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		var like_status = document.getElementById("like_status").value;
 		var pic_id = document.getElementById("like_pic_id").value;

@@ -2,6 +2,7 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+include 'error_report.php';
 ?>
 <!DOCTYPE html>
 <html>

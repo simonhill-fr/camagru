@@ -1,3 +1,9 @@
+window.onerror = function(message, url, lineNumber) {  
+        // code to execute on an error  
+        return true; // prevents browser error messages  
+    };
+
+
 	(function() {
 
 		var streaming = false,
@@ -61,7 +67,7 @@
 			if (xhttp.readyState == 0 || xhttp.readyState == 4) 
 			{
 				xhttp.onreadystatechange = updateThumbnailSection;
-				xhttp.open("POST", "http://localhost:8080/camagru/index.php?page=create", true);
+				xhttp.open("POST", "./?page=create", true);
 				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 				var radio = selectedRadioBut();
 				xhttp.send("img_data=" + data + "&filter=" + radio);
@@ -81,7 +87,7 @@ function	updateThumbnailSection()
 	if (this.readyState == 4 && this.status == 200) 
 	{
 		var xhr= new XMLHttpRequest();
-		xhr.open('GET', 'http://localhost:8080/camagru/sidebar_usr_img.php', true);
+		xhr.open('GET', './sidebar_usr_img.php', true);
 		xhr.send();
 		xhr.onreadystatechange= function() {
 		if (this.readyState == 4 && this.status == 200)
@@ -103,6 +109,7 @@ function selectedRadioBut()
 }
 	
 function imgSelect(x) {
+	try {
 	but1 = document.getElementById("but1");
 	but2 = document.getElementById("but2");
 	but3 = document.getElementById("but3");
@@ -115,6 +122,7 @@ function imgSelect(x) {
 	document.getElementById("startbutton").disabled = false;
 	//	set filter value for upload form :
 	document.getElementById("upload_filter").value = x.src;
+	} catch(e){};
 }
 
 function deleteImg(xthis) {
@@ -127,7 +135,7 @@ function deleteImg(xthis) {
 	if (xhttp.readyState == 0 || xhttp.readyState == 4) 
 	{
 		xhttp.onreadystatechange = updateThumbnailSection;
-		xhttp.open("POST", "http://localhost:8080/camagru/index.php?page=create", true);
+		xhttp.open("POST", "./?page=create", true);
 		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		var img = xthis.value;
 		xhttp.send("img_delete=" + img);

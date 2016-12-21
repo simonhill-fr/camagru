@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'error_report.php';
 require_once "model/db_query.php";
 
 function create_fly_picture($fileData, $filter_source){
@@ -78,7 +79,7 @@ if ($error)
 	$_SESSION["error"] = $error[0];
 }
 
-header("Location: http://localhost:8080/camagru/?page=create");
+header("Location: ./?page=create");
 
 
 

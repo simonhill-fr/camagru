@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'error_report.php';
 include 'model/db_query.php';
 include 'tools/email_operations.php';
 

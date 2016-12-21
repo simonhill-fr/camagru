@@ -45,15 +45,15 @@ if (isset($_POST["img_delete"])) {
 				<form action="./?page=create" method="post" name="takepic_form">
 					<label>
 						<input id="r1" type="radio" value="glasses.png" name="filter" required>
-						<img id="but1" class="filters" onclick="imgSelect(this)" src="images/filters/glasses.png" width="20%">
+						<img id="but1" class="filters" onclick="try {imgSelect(this)} catch(e){}" src="images/filters/glasses.png" width="20%">
 					</label>
 					<label>
 						<input id="r2" type="radio" value="wig.png" name="filter" required>
-						<img id="but2" class="filters" onclick="imgSelect(this)" src="images/filters/wig.png" width="20%">
+						<img id="but2" class="filters" onclick="try {imgSelect(this)} catch(e){}" src="images/filters/wig.png" width="20%">
 					</label>
 					<label>
 						<input id="r3" type="radio" value="dog.png" name="filter" required>
-						<img id="but3" class="filters" onclick="imgSelect(this)" src="images/filters/dog.png"  width="20%">
+						<img id="but3" class="filters" onclick="try {imgSelect(this)} catch(e){}" src="images/filters/dog.png"  width="20%">
 					</label>
 				</div>
 

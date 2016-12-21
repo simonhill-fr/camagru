@@ -38,7 +38,7 @@
 		echo "</div>";
 	
 	} catch (Exception $e) {
-		echo $e->getMessage();
+		header("Location: error.php?ernum=1");
 	}
 
 ?>

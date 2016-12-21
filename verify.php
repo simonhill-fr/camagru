@@ -1,12 +1,13 @@
 <?php
 session_start();
+include 'error_report.php';
 include 'model/db_query.php';
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Camagru - Email Verification</title>
-	<link rel="stylesheet" type="text/css" href="http://localhost:8080/camagru/signup.css">
+	<link rel="stylesheet" type="text/css" href="../signup.css">
 </head>
 <body>
 	<?php
@@ -36,7 +37,7 @@ include 'model/db_query.php';
 				include 'view/email_verify_success.html';
 		}
 		if ($error)
-			echo $error[0];	
+			echo $error[0];
 	}
 
 ?>

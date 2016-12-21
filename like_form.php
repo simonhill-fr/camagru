@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'error_report.php';
 require_once "model/Feed_Gallery.php";
 
 if (isset($_POST["submit_like"]))
@@ -35,7 +36,7 @@ if (isset($_POST["submit_like"]))
 	if ($error)
 		print_r($error);
 	else
-		header("Location: http://localhost:8080/camagru/");
+		header("Location: ./");
 }
 
 

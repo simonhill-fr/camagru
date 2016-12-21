@@ -17,8 +17,14 @@ function db_connection() {
 
 function db_array_fetchAll($sql, $sql_args)
 {
-	$db = db_connection();
-	$stmt = $db->prepare($sql);
+	if (!$db = db_connection())
+		die("dbconnection error");
+	
+	try {
+		$stmt = $db->prepare($sql);
+	} catch (Exception $e) {
+		header("Location: error.php?ernum=1");
+	}
 	$stmt->execute($sql_args);
 	$result_array = $stmt->fetchAll();
 	$db = NULL;
@@ -28,7 +34,11 @@ function db_array_fetchAll($sql, $sql_args)
 function db_execute($sql, $sql_args)
 {
 	$db = db_connection();
-	$stmt = $db->prepare($sql);
+	try {
+		$stmt = $db->prepare($sql);
+	} catch (Exception $e) {
+		header("Location: error.php?ernum=1");
+	}
 	$ret = $stmt->execute($sql_args);
 	$db = NULL;
 	return ($ret);
