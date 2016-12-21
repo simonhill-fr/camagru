@@ -9,7 +9,7 @@ include 'error_report.php';
 <body>
 <?php 
 	
-	require_once '/Users/shill/http/MyWebSite/camagru/model/db_query.php';
+	require_once 'model/db_query.php';
 	
 	$sql = 
 		"SELECT path FROM pictures 
