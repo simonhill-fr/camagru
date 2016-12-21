@@ -84,4 +84,4 @@ if (isset($_POST["img_delete"])) {
 	</div>
 </div>
 
-<script src="js/takepicture.js"></script>
+<script type="text/javascript" src="js/takepicture.js"></script>

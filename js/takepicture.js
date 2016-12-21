@@ -1,8 +1,3 @@
-window.onerror = function(message, url, lineNumber) {  
-        // code to execute on an error  
-        return true; // prevents browser error messages  
-    };
-
 
 	(function() {
 
