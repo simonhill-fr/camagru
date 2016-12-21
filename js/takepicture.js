@@ -149,6 +149,3 @@ function deleteImg(xthis) {
 
 
 
-
-
-

@@ -34,7 +34,7 @@ if (isset($_POST["submit_comment"]))
 			array_push($error, "Error sending email");
 	}
 	if ($error)
-		print_r($error);
+		header("location: .?comment_error= ".$error[0]."");
 	else
 		header("Location: ./");
 }

@@ -15,7 +15,7 @@
 			foreach ($all_comments as $comment) {
 				include 'put_comment.php';
 			}
-		?>		
+		?>	
 	</div>
 	<div class="like_form">
 		<form action="./like_form.php" method="post">
@@ -27,12 +27,15 @@
 	</div>
 
 	<div class="comment_form">
-			<form action="./comment.php" method="post">
-		<input type="hidden" name="pic_id" value="<?php echo $post->get_img_id() ?>">
-		<input id="comment_form_input" type="text" name="comment_text">
-		<button type="submit" name="submit_comment">
-			Send
-		</button>
+		<?php
+		if (isset($_GET["comment_error"]))	{
+			echo $_GET["comment_error"];
+			unset($_GET["comment_error"]);
+		}?>
+		<form action="./comment.php" method="post">
+			<input type="hidden" name="pic_id" value="<?php echo $post->get_img_id() ?>">
+			<input id="comment_form_input" type="text" name="comment_text">
+			<button type="submit" name="submit_comment"> Send </button>
 		</form>
 	</div>
 </div>

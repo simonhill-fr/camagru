@@ -26,3 +26,34 @@ function LikeImg() {
 		setTimeout('LikeImg()', 500);
 	return (false);
 }*/
+
+
+/*
+function updateThisPost()	{
+	if (this.readyState == 4 && this.status == 200) 
+	{
+		console.log(this.responseText);
+		//document.getElementById("thumb_sidebar").innerHTML = this.responseText;
+		
+	}
+}
+
+function deleteImgFromFeed(xthis) {
+	
+	var xhttp;
+	if (window.XMLHttpRequest)
+	{
+		xhttp = new XMLHttpRequest();
+	}
+	if (xhttp.readyState == 0 || xhttp.readyState == 4) 
+	{
+		xhttp.onreadystatechange = updateThisPost;
+		xhttp.open("POST", "./do_feed_delete_img.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		var img = xthis.value;
+		xhttp.send("img_delete=" + img);
+	}
+	else 
+		setTimeout('takepicture()', 500);
+	return (false);
+}*/
