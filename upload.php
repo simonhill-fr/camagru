@@ -63,8 +63,7 @@ if ($_FILES["imgToUpload"]["size"] > 500000)
 	array_push($error, "File too large");
 }
 //file format
-if ($imageFileType != "jpg" && $imageFileType != "jpeg" 
-	&& $imageFileType != "png" && $imageFileType != "gif")
+if ($imageFileType != "png")
 {
 	array_push($error, "Wrong type");
 }
