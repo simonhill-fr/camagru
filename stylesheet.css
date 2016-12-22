@@ -17,18 +17,27 @@ a:hover {
 	text-decoration:none;
 }
 h1, h2, h3 {
+	font-family: 'Comfortaa', cursive;
 	margin:.8em 0 .2em 0;
 	padding:0;
 }
-#startbutton {
-	background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-decoration: none;
-    margin: 4px 2px;
+#startbutton, #uploadbutton, #imgToUpload{
+    padding: 24px 32px;
+    /*text-decoration: none;*/
+    margin: 8px 2px;
     cursor: pointer;
+    background-color: #fff;
+    color: black;
+    border: 2px solid #555555;
+    border-radius: 5px;
+    transition-duration: 0.6s;
 }
+#startbutton:hover, #uploadbutton:hover, #imgToUpload:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+}
+
 p {
 	margin:.4em 0 .8em 0;
 	padding:0;
@@ -69,6 +78,7 @@ form {
 	padding:0;
 }
 #header ul li a {
+	font-family: 'Poiret One', cursive;
 	display:block;
 	float:right;
 	margin:0 0 0 1px;
@@ -79,9 +89,10 @@ form {
 	text-decoration:none;
 	position:relative;
 	line-height:5em;
+	transition-duration: 0.4s;
 }
 #header ul li a:hover {
-	background:#369;
+	background:black;
 	color:#fff;
 }
 #header ul li a.active,
@@ -180,7 +191,11 @@ form {
 }
 /* png filter selection*/
 .filters {
-	border: 1px solid #ddd;
+	border: 2px solid #ddd;
+	transition-duration:  0.6s;
+}
+.filters:hover {
+	border: 2px solid black;
 }
 /* hide radio buttons*/
 #r1, #r2, #r3 {
@@ -301,7 +316,7 @@ form {
 	padding: 5px;
 }
 
-@media only screen and (min-width: 1000px){
+@media only screen and (min-width: 700px){
 	.feed_post {max-width: 550px;}
 }
 

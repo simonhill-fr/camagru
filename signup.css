@@ -35,12 +35,36 @@ select {
   margin: 0;
   outline: 0;
   padding: 15px;
-  width: 100%;
+  width: 95%;
   background-color: #e8eeef;
   color: #8a97a0;
   box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
   margin-bottom: 30px;
+  transition-duration: 0.1s;
 }
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="datetime"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="time"]:focus,
+input[type="url"]:focus,
+textarea:focus,
+select:focus {
+  border: 3px solid #555;
+  background-color: #d9d9d9;
+}
+
+
+
+
+
+
+
+
 
 input[type="radio"],
 input[type="checkbox"] {
@@ -55,17 +79,23 @@ select {
 
 button {
   padding: 19px 39px 18px 39px;
-  color: #FFF;
-  background-color: #4bc970;
+  color: black;
+  background-color: #fffafa;
   font-size: 18px;
   text-align: center;
   font-style: normal;
   border-radius: 5px;
   width: 100%;
-  border: 1px solid #3ac162;
-  border-width: 1px 1px 3px;
-  box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+  border: 2px solid #555555;
+  /*border-width: 1px 1px 3px;*/
+  box-shadow: 0 -1px 0 rgba(0,0,0,0.1) inset;
   margin-bottom: 10px;
+  transition-duration: 0.6s;
+}
+button:hover {
+  background-color: black;
+  color: white;
+  border: 2px solid black;
 }
 
 fieldset {
@@ -89,7 +119,7 @@ label.light {
 }
 
 .number {
-  background-color: #5fcf80;
+  background-color: black;
   color: #fff;
   height: 30px;
   width: 30px;

@@ -8,8 +8,7 @@ db_connection();
 <html>
 <head>
 	<title>Camagru</title>
-	<meta name="robots" content="index, follow" />
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="stylesheet.css" media="screen" />
 	<link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">

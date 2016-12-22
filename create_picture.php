@@ -8,8 +8,10 @@ function create_picture($filter_source){
 	$fileData = base64_decode($img);
 
 	// Load the stamp layer and bottom layer
-	$stamp = imagecreatefrompng($filter_source);
-	$bottom = imagecreatefromstring($fileData);
+	if (!$stamp = imagecreatefrompng($filter_source))
+		return (false);
+	if (!$bottom = imagecreatefromstring($fileData))
+		return (false);
 
 	// Get width and height of bottom layer
 	$bottom_width = imagesx($bottom);

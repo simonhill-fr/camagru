@@ -9,7 +9,7 @@ function no_match()
 		echo $_POST["submit_err"];
 }
 
-if ($_POST["submit"] == "OK")
+if (isset($_POST["submit"]) && $_POST["submit"] == "OK")
 {
 	$error = array();
 	if (!$_POST["login"] || !$_POST["passwd"])

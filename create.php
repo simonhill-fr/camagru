@@ -18,7 +18,8 @@ if (isset($_POST["img_data"]) && $_POST["img_data"] !== ""
 {
 	include "create_picture.php";
 	$filterPath = "./images/filters/" . $_POST["filter"];
-	create_picture($filterPath);
+	if (!create_picture($filterPath))
+		echo "Sorry";
 }
 
 if (isset($_POST["img_delete"])) {
@@ -70,7 +71,7 @@ if (isset($_POST["img_delete"])) {
 					<h3> or Upload picture </h3>
 					<div class="error"><?php put_create_error(); ?></div>
 					<input id="upload_filter" type="hidden" name="upload_filter" >
-					<input type="file" name="imgToUpload" id="imgToUpload" \>
+					<input id="imgToUpload" type="file" name="imgToUpload"  \>
 					<input id="uploadbutton" type="submit" name="upload_submit" value="Upload Image" >
 					</form>
 				</div>

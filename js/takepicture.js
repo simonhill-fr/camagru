@@ -10,30 +10,48 @@
 		width = 320,
 		height = 0;
 
-		navigator.getMedia = ( navigator.getUserMedia ||
-			navigator.webkitGetUserMedia ||
-			navigator.mozGetUserMedia ||
-			navigator.msGetUserMedia);
-
-		navigator.getMedia(
+		//	Get Video Stream :
+		if (navigator.mediaDevices.getUserMedia)
 		{
-			video: true,
-			audio: false
-		},
-		function(stream) {
-			if (navigator.mozGetUserMedia) {
-				video.mozSrcObject = stream;
-			} else {
-				var vendorURL = window.URL || window.webkitURL;
-				video.src = vendorURL.createObjectURL(stream);
-			}
-			video.play();
-		},
-		function(err) {
-
-			console.log("An error occured! " + err);
+			var constraints = { audio: false, video: true }; 
+			navigator.mediaDevices.getUserMedia(constraints)
+			.then(function(mediaStream) {
+				var video = document.querySelector('video');
+				video.srcObject = mediaStream;
+				video.onloadedmetadata = function(e) {
+					video.play();
+				};
+			})
+			.catch(function(err){}
+			);
 		}
-		);
+		else //legacy support
+		{
+			navigator.getMedia = ( navigator.getUserMedia ||
+				navigator.webkitGetUserMedia ||
+				navigator.mozGetUserMedia ||
+				navigator.msGetUserMedia);
+	
+			navigator.getMedia(
+			{
+				video: true,
+				audio: false
+			},
+			function(stream) {
+				if (navigator.mozGetUserMedia) {
+					video.mozSrcObject = stream;
+				} else {
+					var vendorURL = window.URL || window.webkitURL;
+					video.src = vendorURL.createObjectURL(stream);
+				}
+				video.play();
+			},
+			function(err) {
+	
+				//console.log("An error occured! " + err);
+			}
+			);
+		}
 
 		video.addEventListener('canplay', function(ev){
 			if (!streaming) {
@@ -54,11 +72,7 @@
 			var data = canvas.toDataURL('image/png');
 			//startbutton.value=data;
 			
-			var xhttp;
-			if (window.XMLHttpRequest)
-			{
-				xhttp = new XMLHttpRequest();
-			}
+			var xhttp = get_HttpRequest();
 			if (xhttp.readyState == 0 || xhttp.readyState == 4) 
 			{
 				xhttp.onreadystatechange = updateThumbnailSection;
@@ -77,11 +91,20 @@
 		}, false);
 	})();
 
+function 	get_HttpRequest()	{
+	var xhttp;
+	if (window.XMLHttpRequest) 
+		xhttp = new XMLHttpRequest();
+    else
+    	xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    return (xhttp);
+}
+
 function	updateThumbnailSection()
 {
 	if (this.readyState == 4 && this.status == 200) 
 	{
-		var xhr= new XMLHttpRequest();
+		var xhr = get_HttpRequest();
 		xhr.open('GET', './sidebar_usr_img.php', true);
 		xhr.send();
 		xhr.onreadystatechange= function() {
@@ -90,7 +113,23 @@ function	updateThumbnailSection()
 		};
 	}
 }
+
+function deleteImg(xthis) {
 	
+	var xhttp = get_HttpRequest();
+	if (xhttp.readyState == 0 || xhttp.readyState == 4) 
+	{
+		xhttp.onreadystatechange = updateThumbnailSection;
+		xhttp.open("POST", "./?page=create", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		var img = xthis.value;
+		xhttp.send("img_delete=" + img);
+	}
+	else 
+		setTimeout('takepicture()', 500);
+	return (false);
+}
+
 function selectedRadioBut()
 {
 	var radio = "glasses.png";
@@ -120,25 +159,6 @@ function imgSelect(x) {
 	} catch(e){};
 }
 
-function deleteImg(xthis) {
-	
-	var xhttp;
-	if (window.XMLHttpRequest)
-	{
-		xhttp = new XMLHttpRequest();
-	}
-	if (xhttp.readyState == 0 || xhttp.readyState == 4) 
-	{
-		xhttp.onreadystatechange = updateThumbnailSection;
-		xhttp.open("POST", "./?page=create", true);
-		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		var img = xthis.value;
-		xhttp.send("img_delete=" + img);
-	}
-	else 
-		setTimeout('takepicture()', 500);
-	return (false);
-}
 
 
 
